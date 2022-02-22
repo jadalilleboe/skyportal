@@ -1,6 +1,8 @@
 import os
 import uuid
 import base64
+
+import pytest
 from skyportal.tests import api
 from skyportal.models import DBSession, Obj, Thumbnail
 
@@ -57,6 +59,7 @@ def test_token_user_post_get_thumbnail(upload_data_token, public_group, ztf_came
     )
 
 
+@pytest.mark.flaky(reruns=2)
 def test_token_user_delete_thumbnail_cascade_source(
     upload_data_token, super_admin_token, public_group, ztf_camera
 ):

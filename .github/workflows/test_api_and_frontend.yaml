@@ -29,7 +29,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        test_subset: ["api_and_utils", "frontend_pt1", "frontend_pt2", "flaky"]
+        test_subset: ["api_and_utils", "flaky"]
 
     steps:
       - uses: actions/setup-python@v1
@@ -154,17 +154,6 @@ jobs:
         run: |
           pip install pre-commit
           pre-commit run --from-ref ${{ github.event.pull_request.base.sha }} --to-ref ${{ github.event.pull_request.head.sha }}
-
-      - name: Run front-end tests part 1
-        if: ${{ matrix.test_subset == 'frontend_pt1' }}
-        run: |
-          PYTHONPATH=. python baselayer/tools/test_frontend.py --xml --headless 'skyportal/tests/frontend/sources_and_followup_etc'
-
-      - name: Run front-end tests part 2
-        if: ${{ matrix.test_subset == 'frontend_pt2' }}
-        run: |
-          PYTHONPATH=. python baselayer/tools/test_frontend.py --xml --headless '--ignore=skyportal/tests/frontend/sources_and_followup_etc skyportal/tests/frontend'
-
       - name: Run API & utils tests
         if: ${{ matrix.test_subset == 'api_and_utils' }}
         run: |
