@@ -85,6 +85,7 @@ def test_token_user_delete_thumbnail_cascade_source(
     data = base64.b64encode(
         open(os.path.abspath('skyportal/tests/data/14gqr_new.png'), 'rb').read()
     )
+    print("orig_source_thumbnail_count: ", orig_source_thumbnail_count)
     ttype = 'new'
     status, data = api(
         'POST',
@@ -101,7 +102,10 @@ def test_token_user_delete_thumbnail_cascade_source(
     assert status == 200
     assert data['status'] == 'success'
     assert data['data']['type'] == 'new'
-
+    print(
+        "data after get: ",
+        DBSession.query(Obj).filter(Obj.id == obj_id).first().thumbnails,
+    )
     assert (
         DBSession.query(Thumbnail).filter(Thumbnail.id == thumbnail_id).first().obj.id
     ) == obj_id
@@ -113,7 +117,10 @@ def test_token_user_delete_thumbnail_cascade_source(
     status, data = api('DELETE', f'thumbnail/{thumbnail_id}', token=super_admin_token)
     assert status == 200
     assert data['status'] == 'success'
-
+    print(
+        "data after delete: ",
+        DBSession.query(Obj).filter(Obj.id == obj_id).first().thumbnails,
+    )
     assert (
         len(DBSession.query(Obj).filter(Obj.id == obj_id).first().thumbnails)
         == orig_source_thumbnail_count
