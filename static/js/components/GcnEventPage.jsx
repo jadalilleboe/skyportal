@@ -38,6 +38,7 @@ import GcnSelectionForm from "./GcnSelectionForm";
 
 import ObservationPlanRequestForm from "./ObservationPlanRequestForm";
 import ObservationPlanRequestLists from "./ObservationPlanRequestLists";
+import ObservabilityChart from "./ObservabilityChart";
 
 dayjs.extend(relativeTime);
 dayjs.extend(utc);
@@ -78,6 +79,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     overflow: "hidden",
     flexDirection: "column",
+  },
+  rowContainer: {
+    display: "flex",
+    overflow: "hidden",
+    flexDirection: "row",
   },
   columnItem: {
     marginBottom: theme.spacing(2),
@@ -476,14 +482,17 @@ const GcnEventPage = ({ route }) => {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <div className={styles.gcnEventContainer}>
-              <ObservationPlanRequestForm
-                gcnevent={gcnEvent}
-                action="createNew"
-              />
-              <ObservationPlanRequestLists
-                observationplanRequests={gcnEvent.observationplan_requests}
-              />
+            <div className={styles.rowContainer}>
+              <div className={styles.gcnEventContainer}>
+                <ObservationPlanRequestForm
+                  gcnevent={gcnEvent}
+                  action="createNew"
+                />
+                <ObservationPlanRequestLists
+                  observationplanRequests={gcnEvent.observationplan_requests}
+                />
+              </div>
+              <ObservabilityChart plotData="yuh" />
             </div>
           </AccordionDetails>
         </Accordion>
