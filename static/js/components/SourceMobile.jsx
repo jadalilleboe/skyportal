@@ -448,6 +448,7 @@ const SourceMobile = WidthProvider(
                   spectrumAnnotations={spectrumAnnotations}
                 />
               </AccordionDetails>
+              <Button variant="contained" onClick={dispatch()}>Photoz</Button>
             </Accordion>
           </div>
           <div>

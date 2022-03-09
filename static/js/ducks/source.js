@@ -56,7 +56,13 @@ const SHARE_DATA = "skyportal/SHARE_DATA";
 
 const SEND_ALERT = "skyportal/SEND_ALERT";
 
+const FETCH_PHOTOZ = "skyportal/FETCH_PHOTOZ";
+const FETCH_PHOTOZ_OK = "skyportal/FETCH_PHOTOZ_OK"
+
 export const shareData = (data) => API.POST("/api/sharing", SHARE_DATA, data);
+
+export const fetchPhotoz = (sourceID) => 
+  API.GET(`/api/sources/${sourceID}/datalab`, FETCH_PHOTOZ)
 
 export const uploadPhotometry = (data) =>
   API.POST("/api/photometry", UPLOAD_PHOTOMETRY, data);
