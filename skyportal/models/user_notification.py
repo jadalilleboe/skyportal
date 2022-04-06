@@ -46,6 +46,8 @@ class UserNotification(Base):
         doc="The notification text to display",
     )
 
+    notfication_type = sa.Column(sa.String(), nullable=True, doc="Type of notification")
+
     viewed = sa.Column(
         sa.Boolean,
         nullable=False,
