@@ -9,7 +9,6 @@ def test_add_remove_favorites(driver, user, public_source):
 
     # go to source page, wait until it finishes loading
     driver.get(f"/source/{public_source.id}")
-    driver.wait_for_xpath('//span[contains(text(), "Fe III")]', timeout=20)
 
     # make sure an empty favorites button appears (exclude) then click it!
     driver.click_xpath(f'//*[@data-testid="favorites-exclude_{public_source.id}"]')
