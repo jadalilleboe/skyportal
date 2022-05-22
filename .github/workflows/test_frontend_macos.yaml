@@ -1,4 +1,4 @@
-name: API & frontend
+name: API & frontend macOS
 
 on:
   push:
@@ -29,7 +29,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        test_subset: ["frontend_pt1", "frontend_pt2"]
+        test_subset: ["frontend_pt1_macos", "frontend_pt2_macos"]
 
     steps:
       - uses: actions/setup-python@v1
@@ -54,6 +54,12 @@ jobs:
           path: |
             ~/.cache/pip
           key: ${{ runner.os }}-${{ hashFiles('**/requirements*.txt') }}
+
+      - name: Install docker # Taken from https://github.com/actions/virtual-environments/issues/1143#issuecomment-652264388
+        run: |
+          mkdir -p ~/.docker/machine/cache
+          curl -Lo ~/.docker/machine/cache/boot2docker.iso https://github.com/boot2docker/boot2docker/releases/download/v19.03.12/boot2docker.iso
+          brew install docker docker-machine
 
       - name: Write SkyPortal configs
         run: |
