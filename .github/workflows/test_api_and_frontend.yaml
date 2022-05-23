@@ -36,6 +36,11 @@ jobs:
         with:
           python-version: "3.8"
 
+      - name: Use Node.js
+        uses: actions/setup-node@v2.5.0
+        with:
+          node-version: 17
+
       - name: Checkout main
         uses: actions/checkout@v2
         with:
@@ -81,9 +86,9 @@ jobs:
 
       - name: Install system dependencies
         run: |
-          curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+          # curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 
-          sudo apt install -y wget nodejs unzip firefox nginx libcurl4-gnutls-dev libgnutls28-dev
+          sudo apt install -y wget unzip firefox nginx libcurl4-gnutls-dev libgnutls28-dev
 
           pip install pip==21.3.1
           pip install wheel numpy
