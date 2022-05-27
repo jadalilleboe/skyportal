@@ -177,6 +177,7 @@ def test_set_photometry_data_point_size(driver, user, upload_data_token):
     )
     driver.scroll_to_element_and_click(data_point_size_entry)
     data_point_size_entry.send_keys(5)
+    ActionChains(driver).send_keys(Keys.ESCAPE).perform()
     status, data = api('GET', 'internal/profile', token=upload_data_token)
     assert status == 200
     # default data point size is 4, so after sending the '5' key, data point size should be 45.
